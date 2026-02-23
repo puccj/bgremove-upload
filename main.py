@@ -425,17 +425,23 @@ def main() -> None:
 		)
 
 	if args.no_preview:
-		upload_loop(
-			folder,
-			args.credentials,
-			args.token,
-			manifest_path,
-			args.bg_folder,
-			args.album_id,
-			output_folder,
-			args.interval,
-			args.min_age
-		)
+		print("Starting upload loop without preview...")
+		print("Press Ctrl+C to stop.")
+		try:
+			upload_loop(
+				folder,
+				args.credentials,
+				args.token,
+				manifest_path,
+				args.bg_folder,
+				args.album_id,
+				output_folder,
+				args.interval,
+				args.min_age
+			)
+		except KeyboardInterrupt:
+			print("\nStopping upload loop...")
+		print("Done.")
 		return
 
 	preview_process = mp.Process(
